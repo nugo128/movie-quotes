@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Movie;
 use App\Models\Quote;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,5 +18,6 @@ class DatabaseSeeder extends Seeder
     {
         Movie::factory(5)->create();
         Quote::factory()->create();
+        User::factory()->create();
     }
 }
