@@ -10,6 +10,6 @@
     Hello world!
   </h1> -->
 
-  @include('films.index')
+  @include('login.create')
 </body>
 </html>
