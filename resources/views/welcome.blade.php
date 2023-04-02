@@ -6,8 +6,10 @@
   @vite('resources/css/app.css')
 </head>
 <body>
-  <h1 class="text-3xl font-bold underline text-center color-blue-500">
+  <!-- <h1 class="text-3xl font-bold underline text-center color-blue-500">
     Hello world!
-  </h1>
+  </h1> -->
+
+  @include('films.index')
 </body>
 </html>
