@@ -10,6 +10,6 @@
     Hello world!
   </h1> -->
 
-  @include('login.create')
+  @include('admin.index')
 </body>
 </html>
