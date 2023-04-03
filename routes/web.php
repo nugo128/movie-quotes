@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Movie;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
+});
+Route::get('/movies/{movie}', function (Movie $movie) {
+    dd($movie->title);
+    //tested if database works
+    return view('index');
 });
