@@ -10,6 +10,6 @@
     Hello world!
   </h1> -->
 
-  @include('admin.index')
+  @include('home.index')
 </body>
 </html>
