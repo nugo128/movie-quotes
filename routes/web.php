@@ -28,4 +28,4 @@ Route::get('/', function () {
 //     $quote = Quote::where('movie_id', $movie->movie_id)->inRandomOrder()->first();
 //     return view('films.index', compact('movie', 'quote'));
 // });
-Route::get('/movies/{id}', [MovieController::class,'show']);
+Route::get('/movies/{movie_id}', [MovieController::class,'show'])->name('films.index');
