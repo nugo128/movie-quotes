@@ -9,17 +9,29 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    public function show()
+    public function create()
     {
         return view('login.create');
     }
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
         if (Auth::attempt($credentials)) {
-            // Authentication passed...
-            return redirect()->intended('/dashboard');
+            $request->session()->regenerate();
+            return redirect('/');
         }
-        return redirect()->back()->withErrors(['Invalid email or password']);
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
+    }
+    public function destroy()
+    {
+        auth()->logout();
+        return redirect('/');
     }
 }

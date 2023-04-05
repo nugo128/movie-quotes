@@ -1,3 +1,4 @@
+@props(['name'])
 <!doctype html>
 <html>
 
@@ -7,7 +8,17 @@
     @vite('resources/css/app.css')
 </head>
 
-<body class="bg-[#4E4E4E]">
+<body class="bg-[#4E4E4E] h-screen">
+<div class="flex justify-end items-center gap-4 text-white text-xl m-4">
+    @auth
+        <p>Welcome {{$name}}</p>
+        <form action="/logout" method="post">
+            @csrf
+            <button type="submit">Log Out</button>
+        </form>
+    @endauth
+</div>
+
     <section class="flex h-screen">
         <div class="flex flex-col items-center justify-center h-full ml-3 gap-2 fixed">
             <div
