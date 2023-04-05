@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MovieController;
 use App\Models\Movie;
 use App\Models\Quote;
@@ -29,3 +30,6 @@ Route::get('/', function () {
 //     return view('films.index', compact('movie', 'quote'));
 // });
 Route::get('/movies/{movie_id}', [MovieController::class,'show'])->name('films.index');
+
+Route::get('/login', [LoginController::class,'show'])->name('login')->middleware('guest');
+Route::post('/login', 'LoginController@login')->name('login');
