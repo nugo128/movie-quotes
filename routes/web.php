@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MovieController;
 use App\Models\Movie;
 use App\Models\Quote;
 use Illuminate\Support\Facades\Route;
@@ -20,8 +21,11 @@ Route::get('/', function () {
     $quote = Quote::where('movie_id', $movie->movie_id)->inRandomOrder()->first();
     return view('home.index', compact('movie', 'quote'));
 });
-Route::get('/movies/{movie}', function (Movie $movie) {
-    // dd($movie->title);
-    //tested if database works
-    return view('index', ['movie', $movie]);
-});
+// Route::get('/movies/{movie}', function (Movie $movie) {
+//     // dd($movie->title);
+//     //tested if database works
+//     $movie = Movie::inRandomOrder()->first();
+//     $quote = Quote::where('movie_id', $movie->movie_id)->inRandomOrder()->first();
+//     return view('films.index', compact('movie', 'quote'));
+// });
+Route::get('/movies/{movie_id}', [MovieController::class,'show'])->name('films.index');
