@@ -10,7 +10,7 @@ class MovieController extends Controller
 {
     public function show($movie_id)
     {
-        $movie = Movie::find($movie_id);
+        $movie = Movie::findOrFail($movie_id);
         $quote = Quote::where('movie_id', $movie_id)->get();
 
 
