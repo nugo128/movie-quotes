@@ -1,7 +1,7 @@
 <x-layout name='{{ $user->name }}'>
 
 <div class="flex flex-col w-full items-center mt-7">
-<p class="text-white text-2xl mb-4">Manage movies</p>
+    <p class="text-white text-2xl mb-4">Manage movies</p>
     <div class="bg-white p-8 rounded-md">
         <div class="flex items-center justify-between pb-6">
             <div>
@@ -45,6 +45,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="flex justify-end">
+            <p class="bg-blue-500 text-white px-4 py-2 mt-1 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"><a href="admin/movies/create">Add Movie</a></p>
         </div>
     </div>
 </div>
