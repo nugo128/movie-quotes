@@ -5,6 +5,6 @@
     <p></p>
     </div>
     <div><p class="text-white text-4xl">"{{$quote->quote}}"</p></div>
-    <div><a href="{{ route('films.index', ['movie_id' => $movie->movie_id]) }}" class="underline text-white text-4xl mt-12">{{$movie->title}}</a></div>
+    <div><a href="{{ route('films.index', ['id' => $movie->id]) }}" class="underline text-white text-4xl mt-12">{{$movie->title}}</a></div>
 </section>
 </x-layout>

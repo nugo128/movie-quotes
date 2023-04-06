@@ -18,7 +18,6 @@ class MovieFactory extends Factory
     public function definition(): array
     {
         return [
-            'movie_id' => $this->faker->unique()->randomNumber(2),
             'title' => $this->faker->sentence()
         ];
     }
