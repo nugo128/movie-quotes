@@ -1,7 +1,7 @@
 <x-layout name='{{ $user->name }}'>
 
-<div class="flex flex-col w-full items-center justify-center">
-<p class="text-white">click here to <a class="underline text-lg" href="/manage/movies/create">create new movie</a>, or edit and delete below</p>
+<div class="flex flex-col w-full items-center mt-7">
+<p class="text-white text-2xl mb-4">Manage movies</p>
     <div class="bg-white p-8 rounded-md">
         <div class="flex items-center justify-between pb-6">
             <div>
@@ -24,7 +24,7 @@
                                     </td>
 
                                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <a href="/manage/movies/{{$movies->id}}/edit">
+                                        <a href="admin/movies/{{$movies->id}}/edit">
                                             <p class="text-blue-500 whitespace-no-wrap">
                                                 edit
                                             </p>
@@ -32,7 +32,7 @@
                                     </td>
 
                                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <form method="POST" action="/manage/movies/{{$movies->id}}">
+                                        <form method="POST" action="admin/movies/{{$movies->id}}">
                                             @csrf
                                             @method('DELETE')
                                             <button>Delete</button>
