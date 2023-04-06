@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\MoviesCrudController;
 use App\Models\Movie;
 use App\Models\Quote;
 use App\Models\User;
@@ -37,3 +38,5 @@ Route::get('/movies/{id}', [MovieController::class,'show'])->name('films.index')
 Route::get('/login', [LoginController::class,'create'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class,'destroy']);
+
+Route::get('manage/movies', [MoviesCrudController::class,'index']);
