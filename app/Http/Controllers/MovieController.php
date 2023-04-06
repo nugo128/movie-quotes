@@ -12,8 +12,9 @@ class MovieController extends Controller
     {
         $movie = Movie::findOrFail($movie_id);
         $quote = Quote::where('movie_id', $movie_id)->get();
+        $user = auth()->user();
 
 
-        return view('films.index', compact('movie', 'quote'));
+        return view('films.index', compact('movie', 'quote', 'user'));
     }
 }
