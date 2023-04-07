@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movie;
+use App\Models\Quote;
 use Illuminate\Http\Request;
 
 class MoviesCrudController extends Controller
@@ -11,7 +12,8 @@ class MoviesCrudController extends Controller
     {
         $user = auth()->user();
         $movie = Movie::all();
-        return view('manage.movies.index', compact('user', 'movie'));
+        $quote = Quote::all();
+        return view('manage.movies.index', compact('user', 'movie', 'quote'));
     }
 
     public function create()
@@ -34,7 +36,7 @@ class MoviesCrudController extends Controller
     public function update($id)
     {
         $attributes = request()->validate(['title'=>'required']);
-        $movie = Movie::find($id);
+        $movie = Movie::findOrFail($id);
         $movie->update($attributes);
 
 

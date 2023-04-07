@@ -21,8 +21,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $movie = Movie::inRandomOrder()->first();
-    $quote = $movie->quote()->inRandomOrder()->first();
+    $movie = Movie::has('quote')->inRandomOrder()->first();
+    $quote = $movie ? $movie->quote()->inRandomOrder()->first() : null;
     $user = auth()->user();
 
     return view('home.index', compact('movie', 'quote', 'user'));
@@ -49,5 +49,9 @@ Route::get('admin/movies/{id}/edit', [MoviesCrudController::class,'edit'])->name
 Route::patch('admin/movies/{id}', [MoviesCrudController::class,'update'])->middleware('auth');
 Route::delete('admin/movies/{id}', [MoviesCrudController::class,'destroy'])->middleware('auth');
 
-Route::get('admin/quotes/create', [QuotesCrudController::class, 'create']);
-Route::post('admin/quotes/create', [QuotesCrudController::class, 'store']);
+Route::get('admin/quotes/create', [QuotesCrudController::class, 'create'])->middleware('auth');
+Route::post('admin/quotes/create', [QuotesCrudController::class, 'store'])->middleware('auth');
+
+Route::get('admin/quotes/{id}/edit', [QuotesCrudController::class,'edit'])->middleware('auth');
+Route::patch('admin/quotes/{id}', [QuotesCrudController::class,'update'])->middleware('auth');
+Route::delete('admin/movies/{id}', [MoviesCrudController::class,'destroy'])->middleware('auth');

@@ -34,4 +34,30 @@ class QuotesCrudController extends Controller
 
         return redirect('/admin');
     }
+    public function edit($id)
+    {
+        $user = auth()->user();
+        $quote = Quote::find($id);
+        $movies = Movie::all();
+        return view('manage.quotes.edit', ['quote' => $quote, 'user'=>$user, 'movies'=>$movies]);
+    }
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'quote' => 'required|max:255',
+            'movie_id' => 'required|exists:movies,id',
+            'thumbnail' => 'image', 
+        ]);
+        $quote = Quote::findOrFail($id);
+        $quote->quote = $request->input('quote');
+        $quote->movie_id = $request->input('movie_id');
+
+        if ($request->hasFile('thumbnail')) {
+            $thumbnail = $request->file('thumbnail');
+            $thumbnailPath = $thumbnail->store('thumbnails');
+            $quote->thumbnail = $thumbnailPath;
+        }
+        $quote->save();
+        return redirect('/admin')->with('success', 'Quote updated successfully!');
+    }
 }
