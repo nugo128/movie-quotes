@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\MoviesCrudController;
 use App\Models\Movie;
 use App\Models\Quote;
 use App\Models\User;
@@ -37,3 +38,12 @@ Route::get('/movies/{id}', [MovieController::class,'show'])->name('films.index')
 Route::get('/login', [LoginController::class,'create'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class,'destroy']);
+
+Route::get('admin', [MoviesCrudController::class,'index'])->middleware('auth');
+
+Route::get('admin/movies/create', [MoviesCrudController::class,'create'])->middleware('auth');
+Route::post('admin/movies/create', [MoviesCrudController::class,'store'])->middleware('auth');
+
+Route::get('admin/movies/{id}/edit', [MoviesCrudController::class,'edit'])->name('manage.movies.edit')->middleware('auth');
+Route::patch('admin/movies/{id}', [MoviesCrudController::class,'update'])->middleware('auth');
+Route::delete('admin/movies/{id}', [MoviesCrudController::class,'destroy'])->middleware('auth');

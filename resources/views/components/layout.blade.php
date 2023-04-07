@@ -12,6 +12,7 @@
 <div class="flex justify-end items-center gap-4 text-white text-xl m-4">
     @auth
         <p>Welcome {{$name}}</p>
+        <a href="/admin">Admin Page</a>
         <form action="/logout" method="post">
             @csrf
             <button type="submit">Log Out</button>
