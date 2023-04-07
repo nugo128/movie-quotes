@@ -38,7 +38,7 @@ class MoviesCrudController extends Controller
         $movie->update($attributes);
 
 
-        return back()->with('success', 'edited!');
+        return redirect('/admin')->with('success', 'edited!');
     }
     public function destroy($id)
     {
