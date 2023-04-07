@@ -23,7 +23,7 @@ class MoviesCrudController extends Controller
     {
         $attributes = request()->validate(['title'=>'required']);
         Movie::create($attributes);
-        return redirect(route('admin'));
+        return redirect()->route('admin');
     }
     public function edit($id)
     {
