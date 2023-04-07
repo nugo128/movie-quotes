@@ -41,17 +41,7 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class,'destroy']);
 
 Route::get('admin', [MoviesCrudController::class,'index'])->middleware('auth');
-
-Route::get('admin/movies/create', [MoviesCrudController::class,'create'])->middleware('auth');
+Route::resource('admin/movies', MoviesCrudController::class)->except('show')->middleware('auth');
 Route::post('admin/movies/create', [MoviesCrudController::class,'store'])->middleware('auth');
-
-Route::get('admin/movies/{id}/edit', [MoviesCrudController::class,'edit'])->name('manage.movies.edit')->middleware('auth');
-Route::patch('admin/movies/{id}', [MoviesCrudController::class,'update'])->middleware('auth');
-Route::delete('admin/movies/{id}', [MoviesCrudController::class,'destroy'])->middleware('auth');
-
-Route::get('admin/quotes/create', [QuotesCrudController::class, 'create'])->middleware('auth');
+Route::resource('admin/quotes', QuotesCrudController::class)->middleware('auth');
 Route::post('admin/quotes/create', [QuotesCrudController::class, 'store'])->middleware('auth');
-
-Route::get('admin/quotes/{id}/edit', [QuotesCrudController::class,'edit'])->middleware('auth');
-Route::patch('admin/quotes/{id}', [QuotesCrudController::class,'update'])->middleware('auth');
-Route::delete('admin/quotes/{id}', [QuotesCrudController::class,'destroy'])->middleware('auth');
