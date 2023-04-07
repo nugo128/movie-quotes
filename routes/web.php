@@ -54,4 +54,4 @@ Route::post('admin/quotes/create', [QuotesCrudController::class, 'store'])->midd
 
 Route::get('admin/quotes/{id}/edit', [QuotesCrudController::class,'edit'])->middleware('auth');
 Route::patch('admin/quotes/{id}', [QuotesCrudController::class,'update'])->middleware('auth');
-Route::delete('admin/movies/{id}', [MoviesCrudController::class,'destroy'])->middleware('auth');
+Route::delete('admin/quotes/{id}', [QuotesCrudController::class,'destroy'])->middleware('auth');

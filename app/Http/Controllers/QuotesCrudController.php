@@ -60,4 +60,10 @@ class QuotesCrudController extends Controller
         $quote->save();
         return redirect('/admin')->with('success', 'Quote updated successfully!');
     }
+    public function destroy($id)
+    {
+        $quote= Quote::find($id);
+        $quote->delete();
+        return back()->with('success', 'deleted!');
+    }
 }
