@@ -3,6 +3,7 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\MoviesCrudController;
+use App\Http\Controllers\QuotesCrudController;
 use App\Models\Movie;
 use App\Models\Quote;
 use App\Models\User;
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $movie = Movie::inRandomOrder()->first();
-    $quote = Quote::where('id', $movie->id)->inRandomOrder()->first();
+    $quote = $movie->quote()->inRandomOrder()->first();
     $user = auth()->user();
 
     return view('home.index', compact('movie', 'quote', 'user'));
@@ -47,3 +48,6 @@ Route::post('admin/movies/create', [MoviesCrudController::class,'store'])->middl
 Route::get('admin/movies/{id}/edit', [MoviesCrudController::class,'edit'])->name('manage.movies.edit')->middleware('auth');
 Route::patch('admin/movies/{id}', [MoviesCrudController::class,'update'])->middleware('auth');
 Route::delete('admin/movies/{id}', [MoviesCrudController::class,'destroy'])->middleware('auth');
+
+Route::get('admin/quotes/create', [QuotesCrudController::class, 'create']);
+Route::post('admin/quotes/create', [QuotesCrudController::class, 'store']);

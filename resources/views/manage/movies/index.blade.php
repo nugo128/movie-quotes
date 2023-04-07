@@ -50,6 +50,10 @@
             <p class="bg-blue-500 text-white px-4 py-2 mt-1 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"><a href="admin/movies/create">Add Movie</a></p>
         </div>
     </div>
+    <div>
+    <div class="flex justify-end">
+            <p class="bg-blue-500 text-white px-4 py-2 mt-1 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"><a href="admin/quotes/create">Add quote</a></p>
+        </div>
+    </div>
 </div>
-
 </x-layout>

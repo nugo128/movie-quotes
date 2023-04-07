@@ -10,9 +10,9 @@ class MovieController extends Controller
 {
     public function show($id)
     {
-
         $movie = Movie::findOrFail($id);
-        $quote = Quote::where('id', $id)->get();
+        $quote = $movie->quote;
+
 
         $user = auth()->user();
 

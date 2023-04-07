@@ -17,12 +17,9 @@ class QuoteFactory extends Factory
     public function definition(): array
     {
         return [
-            'quotes_id' => $this->faker->unique()->randomNumber(2),
             'movie_id' => $this->faker->unique()->randomNumber(2),
             'quote' => $this->faker->sentence(),
             'thumbnail' => $this->faker->word()
-
-
         ];
     }
 }

@@ -12,7 +12,6 @@ return new class () extends Migration {
     {
         Schema::create('quotes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('quotes_id');
             $table->foreignId('movie_id');
             $table->string('quote');
             $table->string('thumbnail');
