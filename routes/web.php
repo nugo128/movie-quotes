@@ -39,11 +39,11 @@ Route::get('/login', [LoginController::class,'create'])->name('login')->middlewa
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class,'destroy']);
 
-Route::get('admin', [MoviesCrudController::class,'index']);
+Route::get('admin', [MoviesCrudController::class,'index'])->middleware('auth');
 
-Route::get('admin/movies/create', [MoviesCrudController::class,'create']);
-Route::post('admin/movies/create', [MoviesCrudController::class,'store']);
+Route::get('admin/movies/create', [MoviesCrudController::class,'create'])->middleware('auth');
+Route::post('admin/movies/create', [MoviesCrudController::class,'store'])->middleware('auth');
 
-Route::get('admin/movies/{id}/edit', [MoviesCrudController::class,'edit'])->name('manage.movies.edit');
-Route::patch('admin/movies/{id}', [MoviesCrudController::class,'update']);
-Route::delete('admin/movies/{id}', [MoviesCrudController::class,'destroy']);
+Route::get('admin/movies/{id}/edit', [MoviesCrudController::class,'edit'])->name('manage.movies.edit')->middleware('auth');
+Route::patch('admin/movies/{id}', [MoviesCrudController::class,'update'])->middleware('auth');
+Route::delete('admin/movies/{id}', [MoviesCrudController::class,'destroy'])->middleware('auth');
