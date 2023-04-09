@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MovieRequest;
 use App\Models\Movie;
 use App\Models\Quote;
 use Illuminate\Http\Request;
@@ -21,11 +22,11 @@ class MoviesCrudController extends Controller
         $user = auth()->user();
         return view('manage.movies.add-movie', compact('user'));
     }
-    public function store()
+    public function store(MovieRequest $request)
     {
-        $attributes = request()->validate(['title'=>'required']);
+        $attributes = $request->validated();
         Movie::create($attributes);
-        return redirect('/admin');
+        return redirect()->route('admin');
     }
     public function edit($id)
     {
@@ -33,14 +34,12 @@ class MoviesCrudController extends Controller
         $movie = Movie::find($id);
         return view('manage.movies.edit', ['movie' => $movie, 'user'=>$user]);
     }
-    public function update($id)
+    public function update(MovieRequest $request, $id)
     {
-        $attributes = request()->validate(['title'=>'required']);
+        $attributes = $request->validated();
         $movie = Movie::findOrFail($id);
         $movie->update($attributes);
-
-
-        return redirect('/admin')->with('success', 'edited!');
+        return redirect()->route('admin')->with('success', 'edited!');
     }
     public function destroy($id)
     {
