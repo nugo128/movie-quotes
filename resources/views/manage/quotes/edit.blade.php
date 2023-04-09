@@ -2,7 +2,7 @@
     <div class="flex flex-col w-full items-center mt-28">
         <div class="w-full max-w-sm p-8 bg-white rounded-md shadow-md">
             <h1 class="text-center text-2xl font-bold mb-6">Edit Movie: {{$quote->quote}}</h1>
-            <form action="/admin/quotes/{{$quote->id}}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('quotes.update', ['quote' => $quote->id]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
                 <div class="mb-4">

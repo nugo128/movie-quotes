@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\QuoteRequest;
 use App\Models\Movie;
 use App\Models\Quote;
 use Illuminate\Http\Request;
@@ -15,14 +16,9 @@ class QuotesCrudController extends Controller
         $movie = Movie::all();
         return view('manage.quotes.add-quote', compact('user', 'movie'));
     }
-    public function store(Request $request)
+    public function store(QuoteRequest $request)
     {
-        // Retrieve form data
-        $attributes = $request->validate([
-            'quote' => 'required',
-            'movie_id' => ['required', Rule::exists('movies', 'id')],
-            'thumbnail' => 'required|image'
-        ]);
+        $attributes = $request->validated();
 
         $quote = new Quote();
         $quote->quote = $attributes['quote'];
@@ -32,7 +28,7 @@ class QuotesCrudController extends Controller
 
         $quote->save();
 
-        return redirect('/admin');
+        return redirect()->route('admin');
     }
     public function edit($id)
     {
@@ -41,13 +37,8 @@ class QuotesCrudController extends Controller
         $movies = Movie::all();
         return view('manage.quotes.edit', ['quote' => $quote, 'user'=>$user, 'movies'=>$movies]);
     }
-    public function update(Request $request, $id)
+    public function update(QuoteRequest $request, $id)
     {
-        $request->validate([
-            'quote' => 'required|max:255',
-            'movie_id' => 'required|exists:movies,id',
-            'thumbnail' => 'image', 
-        ]);
         $quote = Quote::findOrFail($id);
         $quote->quote = $request->input('quote');
         $quote->movie_id = $request->input('movie_id');
@@ -57,8 +48,10 @@ class QuotesCrudController extends Controller
             $thumbnailPath = $thumbnail->store('thumbnails');
             $quote->thumbnail = $thumbnailPath;
         }
+
         $quote->save();
-        return redirect('/admin')->with('success', 'Quote updated successfully!');
+
+        return redirect()->route('admin')->with('success', 'Quote updated successfully!');
     }
     public function destroy($id)
     {

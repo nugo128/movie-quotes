@@ -15,7 +15,7 @@
                                         <div class="flex items-center">
                                             <div class="ml-3">
                                                 <p class="text-gray-900 whitespace-no-wrap">
-                                                    <a href="/movies/{{$movies->id}}">
+                                                <a href="{{ route('movies.index', ['id' => $movies->id]) }}">
                                                         {{$movies->title}}
                                                     </a>
                                                 </p>
@@ -32,7 +32,7 @@
                                     </td>
 
                                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <form method="POST" action="admin/movies/{{$movies->id}}">
+                                    <form method="POST" action="{{ route('movies.destroy', ['movie' => $movies->id]) }}">
                                             @csrf
                                             @method('DELETE')
                                             <button>Delete</button>
@@ -47,7 +47,7 @@
             </div>
         </div>
         <div class="flex justify-end">
-            <p class="bg-blue-500 text-white px-4 py-2 mt-1 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"><a href="admin/movies/create">Add Movie</a></p>
+            <p class="bg-blue-500 text-white px-4 py-2 mt-1 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"><a href="{{ route('movies.create') }}">Add Movie</a></p>
         </div>
     </div>
     <div class="w-max">
@@ -65,9 +65,7 @@
                                             <div class="flex items-center">
                                                 <div class="ml-3">
                                                     <p class="text-gray-900 whitespace-no-wrap">
-                                                        <a href="/movies/{{$quotes->movie_id}}">
-                                                            {{$quotes->quote}}
-                                                        </a>
+                                                    {{ $quotes->quote }}
                                                     </p>
                                                 </div>
                                             </div>
@@ -79,7 +77,8 @@
                                         </td>
 
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white                                         text-sm">
-                                            <a href="admin/quotes/{{$quotes->id}}/edit">
+                                        <a href="{{ route('quotes.edit', ['quote' => $quotes->id]) }}">
+
                                                 <p class="text-blue-500 whitespace-no-wrap">
                                                     edit
                                                 </p>
@@ -87,7 +86,7 @@
                                         </td>
 
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                            <form method="POST" action="admin/quotes/{{$quotes->id}}">
+                                        <form method="POST" action="{{ route('quotes.destroy', ['quote' => $quotes->id]) }}">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button>Delete</button>

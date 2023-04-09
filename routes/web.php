@@ -40,8 +40,11 @@ Route::get('/login', [LoginController::class,'create'])->name('login')->middlewa
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class,'destroy']);
 
-Route::get('/admin', [MoviesCrudController::class,'index'])->middleware('auth')->name('admin');
-Route::resource('admin/movies', MoviesCrudController::class)->except('show')->middleware('auth');
-Route::post('admin/movies/create', [MoviesCrudController::class,'store'])->middleware('auth');
+Route::middleware(['auth'])->prefix('admin')->group(function () {
+    Route::get('/', [MoviesCrudController::class, 'index'])->name('admin');
+    Route::resource('movies', MoviesCrudController::class)->except('show');
+    Route::post('movies/create', [MoviesCrudController::class, 'store'])->name('movies.store');
+});
+
 Route::resource('admin/quotes', QuotesCrudController::class)->middleware('auth');
-Route::post('admin/quotes/create', [QuotesCrudController::class, 'store'])->middleware('auth');
+Route::post('admin/quotes/create', [QuotesCrudController::class, 'store'])->name('quotes.store');
