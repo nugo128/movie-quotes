@@ -28,22 +28,19 @@ class MoviesCrudController extends Controller
         Movie::create($attributes);
         return redirect()->route('admin');
     }
-    public function edit($id)
+    public function edit(Movie $movie)
     {
         $user = auth()->user();
-        $movie = Movie::find($id);
         return view('manage.movies.edit', ['movie' => $movie, 'user'=>$user]);
     }
-    public function update(MovieRequest $request, $id)
+    public function update(MovieRequest $request, Movie $movie)
     {
         $attributes = $request->validated();
-        $movie = Movie::findOrFail($id);
         $movie->update($attributes);
         return redirect()->route('admin')->with('success', 'edited!');
     }
-    public function destroy($id)
+    public function destroy(Movie $movie)
     {
-        $movie = Movie::find($id);
         $movie->delete();
         return back()->with('success', 'deleted!');
     }

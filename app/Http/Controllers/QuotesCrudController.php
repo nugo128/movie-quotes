@@ -30,16 +30,14 @@ class QuotesCrudController extends Controller
 
         return redirect()->route('admin');
     }
-    public function edit($id)
+    public function edit(Quote $quote)
     {
         $user = auth()->user();
-        $quote = Quote::find($id);
         $movies = Movie::all();
         return view('manage.quotes.edit', ['quote' => $quote, 'user'=>$user, 'movies'=>$movies]);
     }
-    public function update(QuoteRequest $request, $id)
+    public function update(QuoteRequest $request, Quote $quote)
     {
-        $quote = Quote::findOrFail($id);
         $quote->quote = $request->input('quote');
         $quote->movie_id = $request->input('movie_id');
 
@@ -53,9 +51,8 @@ class QuotesCrudController extends Controller
 
         return redirect()->route('admin')->with('success', 'Quote updated successfully!');
     }
-    public function destroy($id)
+    public function destroy(Quote $quote)
     {
-        $quote= Quote::find($id);
         $quote->delete();
         return back()->with('success', 'deleted!');
     }
