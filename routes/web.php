@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\MoviesCrudController;
 use App\Models\Movie;
 use App\Models\Quote;
 use App\Models\User;
@@ -24,7 +25,7 @@ Route::get('/', function () {
     $user = auth()->user();
 
     return view('home.index', compact('movie', 'quote', 'user'));
-});
+})->name('home');
 // Route::get('/movies/{movie}', function (Movie $movie) {
 //     // dd($movie->title);
 //     //tested if database works
@@ -36,4 +37,9 @@ Route::get('/movies/{id}', [MovieController::class,'show'])->name('films.index')
 
 Route::get('/login', [LoginController::class,'create'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'login']);
-Route::post('/logout', [LoginController::class,'destroy']);
+Route::post('/logout', [LoginController::class,'destroy'])->name('logout');
+
+Route::middleware(['auth'])->prefix('admin')->group(function () {
+    Route::get('/', [MoviesCrudController::class, 'index'])->name('admin');
+    Route::resource('movies', MoviesCrudController::class)->except('show');
+});
