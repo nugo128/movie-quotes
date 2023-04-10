@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
+
     public function show(Movie $movie,$id)
     {
         $movie = Movie::findOrFail($id);
@@ -17,6 +18,9 @@ class MovieController extends Controller
         $user = auth()->user();
 
 
+        $quote = Quote::where('movie_id', $movie->id)->get();
+
+        $user = auth()->user();
         return view('films.index', compact('movie', 'quote', 'user'));
     }
 }

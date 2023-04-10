@@ -22,15 +22,18 @@ class MoviesCrudController extends Controller
         $user = auth()->user();
         return view('manage.movies.add-movie', compact('user'));
     }
+
     public function store(MovieRequest $request)
     {
         $attributes = $request->validated();
+
         Movie::create($attributes);
         return redirect()->route('admin');
     }
     public function edit(Movie $movie)
     {
         $user = auth()->user();
+
         return view('manage.movies.edit', ['movie' => $movie, 'user'=>$user]);
     }
     public function update(MovieRequest $request, Movie $movie)
@@ -38,6 +41,7 @@ class MoviesCrudController extends Controller
         $attributes = $request->validated();
         $movie->update($attributes);
         return redirect()->route('admin')->with('success', 'edited!');
+
     }
     public function destroy(Movie $movie)
     {

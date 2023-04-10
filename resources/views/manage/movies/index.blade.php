@@ -1,5 +1,6 @@
 <x-layout name='{{ $user->name }}'>
 
+
 <div class="flex flex-col w-full items-center mt-7 mb-10">
     <p class="text-white text-2xl mb-4">Manage movies</p>
     <div id="div1" class="flex-grow-1 bg-white p-8 rounded-md">
@@ -23,13 +24,15 @@
                                         </div>
                                     </td>
 
-                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <a href="admin/movies/{{$movies->id}}/edit">
-                                            <p class="text-blue-500 whitespace-no-wrap">
-                                                edit
-                                            </p>
-                                        </a>
-                                    </td>
+
+                                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                <a href="{{ route('movies.edit', $movies->id) }}">
+                                                    <p class="text-blue-500 whitespace-no-wrap">
+                                                        edit
+                                                    </p>
+                                                </a>
+                                            </td>
+
 
                                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                     <form method="POST" action="{{ route('movies.destroy', ['movie' => $movies->id]) }}">
@@ -102,10 +105,10 @@
             </div>
             <div class="flex justify-end">
                 <p class="bg-blue-500 text-white px-4 py-2 mt-1 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"><a href="admin/quotes/create">Add Quote</a></p>
+
             </div>
         </div>
     </div>
-</div>
 
 </x-layout>
 

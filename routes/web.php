@@ -26,7 +26,7 @@ Route::get('/', function () {
     $user = auth()->user();
 
     return view('home.index', compact('movie', 'quote', 'user'));
-});
+})->name('home');
 // Route::get('/movies/{movie}', function (Movie $movie) {
 //     // dd($movie->title);
 //     //tested if database works
@@ -38,7 +38,9 @@ Route::get('/movies/{id}', [MovieController::class,'show'])->name('films.index')
 
 Route::get('/login', [LoginController::class,'create'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'login']);
-Route::post('/logout', [LoginController::class,'destroy']);
+
+Route::post('/logout', [LoginController::class,'destroy'])->name('logout');
+
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/', [MoviesCrudController::class, 'index'])->name('admin');
@@ -48,3 +50,4 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
 Route::resource('admin/quotes', QuotesCrudController::class)->middleware('auth');
 Route::post('admin/quotes/create', [QuotesCrudController::class, 'store'])->name('quotes.store');
+

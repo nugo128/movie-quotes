@@ -3,7 +3,9 @@
         <!-- class="flex flex-col w-full items-center mt-7" -->
         <div class="w-full max-w-sm p-8 bg-white rounded-md shadow-md">
             <h1 class="text-center text-2xl font-bold mb-6">Edit Movie: {{$movie->title}}</h1>
+
             <form action="{{ route('movies.update', ['movie' => $movie->id]) }}" method="POST">
+
                 @csrf
                 @method('PATCH')
                 <div class="mb-4">
