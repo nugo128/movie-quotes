@@ -25,7 +25,7 @@ Route::get('/', function () {
     $user = auth()->user();
 
     return view('home.index', compact('movie', 'quote', 'user'));
-});
+})->name('home');
 // Route::get('/movies/{movie}', function (Movie $movie) {
 //     // dd($movie->title);
 //     //tested if database works
