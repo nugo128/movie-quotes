@@ -19,30 +19,25 @@ class MoviesCrudController extends Controller
         $user = auth()->user();
         return view('manage.movies.add-movie', compact('user'));
     }
-    public function store()
+    public function store(Request $request)
     {
-        $attributes = request()->validate(['title'=>'required']);
+        $attributes = $request->validate(['title' => 'required']);
         Movie::create($attributes);
-        return redirect('/admin');
+        return redirect()->route('admin');
     }
-    public function edit($id)
+    public function edit(Movie $movie)
     {
         $user = auth()->user();
-        $movie = Movie::find($id);
-        return view('manage.movies.edit', ['movie' => $movie, 'user'=>$user]);
+        return view('manage.movies.edit', ['movie' => $movie, 'user' => $user]);
     }
-    public function update($id)
+    public function update(Request $request, Movie $movie)
     {
-        $attributes = request()->validate(['title'=>'required']);
-        $movie = Movie::find($id);
+        $attributes = $request->validate(['title' => 'required']);
         $movie->update($attributes);
-
-
-        return redirect('/admin')->with('success', 'edited!');
+        return redirect(route('admin'))->with('success', 'edited!');
     }
-    public function destroy($id)
+    public function destroy(Movie $movie)
     {
-        $movie = Movie::find($id);
         $movie->delete();
         return back()->with('success', 'deleted!');
     }

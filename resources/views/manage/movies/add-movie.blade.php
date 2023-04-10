@@ -1,6 +1,6 @@
 <x-layout name="{{$user->name}}">
     <div class="flex flex-col w-full items-center mt-28">
-        <form action="/admin/movies/create" method="post" class="w-full max-w-sm p-8 bg-white rounded-md shadow-md">
+        <form action="{{route('movies.store')}}" method="POST" class="w-full max-w-sm p-8 bg-white rounded-md shadow-md">
             @csrf
             <label for="title" class="block text-gray-700 mb-2">Title</label>
             <input type="text" name="title" id="title" class="w-full border border-gray-400 px-4 py-2 rounded-md focus:outline-none focus:border-blue-500">

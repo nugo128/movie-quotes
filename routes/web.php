@@ -25,7 +25,7 @@ Route::get('/', function () {
     $user = auth()->user();
 
     return view('home.index', compact('movie', 'quote', 'user'));
-});
+})->name('home');
 // Route::get('/movies/{movie}', function (Movie $movie) {
 //     // dd($movie->title);
 //     //tested if database works
@@ -37,13 +37,9 @@ Route::get('/movies/{id}', [MovieController::class,'show'])->name('films.index')
 
 Route::get('/login', [LoginController::class,'create'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'login']);
-Route::post('/logout', [LoginController::class,'destroy']);
+Route::post('/logout', [LoginController::class,'destroy'])->name('logout');
 
-Route::get('admin', [MoviesCrudController::class,'index'])->middleware('auth');
-
-Route::get('admin/movies/create', [MoviesCrudController::class,'create'])->middleware('auth');
-Route::post('admin/movies/create', [MoviesCrudController::class,'store'])->middleware('auth');
-
-Route::get('admin/movies/{id}/edit', [MoviesCrudController::class,'edit'])->name('manage.movies.edit')->middleware('auth');
-Route::patch('admin/movies/{id}', [MoviesCrudController::class,'update'])->middleware('auth');
-Route::delete('admin/movies/{id}', [MoviesCrudController::class,'destroy'])->middleware('auth');
+Route::middleware(['auth'])->prefix('admin')->group(function () {
+    Route::get('/', [MoviesCrudController::class, 'index'])->name('admin');
+    Route::resource('movies', MoviesCrudController::class)->except('show');
+});
