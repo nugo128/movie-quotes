@@ -12,8 +12,8 @@ return new class () extends Migration {
     {
         Schema::create('quotes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('quotes_id');
-            $table->foreignId('movie_id');
+            $table->unsignedBigInteger('movie_id');
+            $table->foreign('movie_id')->references('id')->on('movies')->onDelete('cascade');
             $table->string('quote');
             $table->string('thumbnail');
             $table->timestamps();

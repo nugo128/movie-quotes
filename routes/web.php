@@ -3,6 +3,7 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\MoviesCrudController;
+use App\Http\Controllers\QuotesCrudController;
 use App\Models\Movie;
 use App\Models\Quote;
 use App\Models\User;
@@ -20,8 +21,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $movie = Movie::inRandomOrder()->first();
-    $quote = Quote::where('id', $movie->id)->inRandomOrder()->first();
+    $movie = Movie::has('quote')->inRandomOrder()->first();
+    $quote = $movie ? $movie->quote()->inRandomOrder()->first() : null;
     $user = auth()->user();
 
     return view('home.index', compact('movie', 'quote', 'user'));
@@ -37,9 +38,16 @@ Route::get('/movies/{id}', [MovieController::class,'show'])->name('films.index')
 
 Route::get('/login', [LoginController::class,'create'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'login']);
+
 Route::post('/logout', [LoginController::class,'destroy'])->name('logout');
+
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/', [MoviesCrudController::class, 'index'])->name('admin');
     Route::resource('movies', MoviesCrudController::class)->except('show');
+    Route::post('movies/create', [MoviesCrudController::class, 'store'])->name('movies.store');
 });
+
+Route::resource('admin/quotes', QuotesCrudController::class)->middleware('auth');
+Route::post('admin/quotes/create', [QuotesCrudController::class, 'store'])->name('quotes.store');
+

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MovieRequest;
 use App\Models\Movie;
+use App\Models\Quote;
 use Illuminate\Http\Request;
 
 class MoviesCrudController extends Controller
@@ -11,7 +13,8 @@ class MoviesCrudController extends Controller
     {
         $user = auth()->user();
         $movie = Movie::all();
-        return view('manage.movies.index', compact('user', 'movie'));
+        $quote = Quote::all();
+        return view('manage.movies.index', compact('user', 'movie', 'quote'));
     }
 
     public function create()
@@ -19,22 +22,26 @@ class MoviesCrudController extends Controller
         $user = auth()->user();
         return view('manage.movies.add-movie', compact('user'));
     }
-    public function store(Request $request)
+
+    public function store(MovieRequest $request)
     {
-        $attributes = $request->validate(['title' => 'required']);
+        $attributes = $request->validated();
+
         Movie::create($attributes);
         return redirect()->route('admin');
     }
     public function edit(Movie $movie)
     {
         $user = auth()->user();
-        return view('manage.movies.edit', ['movie' => $movie, 'user' => $user]);
+
+        return view('manage.movies.edit', ['movie' => $movie, 'user'=>$user]);
     }
-    public function update(Request $request, Movie $movie)
+    public function update(MovieRequest $request, Movie $movie)
     {
-        $attributes = $request->validate(['title' => 'required']);
+        $attributes = $request->validated();
         $movie->update($attributes);
-        return redirect(route('admin'))->with('success', 'edited!');
+        return redirect()->route('admin')->with('success', 'edited!');
+
     }
     public function destroy(Movie $movie)
     {

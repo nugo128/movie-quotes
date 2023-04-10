@@ -9,6 +9,9 @@ class Quote extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'quote'
+    ];
 
     public function movie()
     {
