@@ -11,9 +11,12 @@
                 <div class="mb-4">
                     <label for="title_en" class="block text-gray-700 mb-2">Title_en</label>
                     <input type="text" name="title_en" id="title_en" value="{{ $movie->getTranslation('title', 'en') }}" class="w-full border border-gray-400 px-4 py-2 rounded-md focus:outline-none focus:border-blue-500">
+                    @error('title_en')
+                            <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                    @enderror
                     <label for="title_ka" class="block text-gray-700 mb-2">Title_ka</label>
                     <input type="text" name="title_ka" id="title_ka" value="{{ $movie->getTranslation('title', 'ka') }}" class="w-full border border-gray-400 px-4 py-2 rounded-md focus:outline-none focus:border-blue-500">
-                    @error('title')
+                    @error('title_ka')
                             <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                     @enderror
                 </div>
