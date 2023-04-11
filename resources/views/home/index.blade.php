@@ -4,7 +4,8 @@
     @if ($movie)
     <div class="w-1/2">
     <img src="/storage/{{$quote->thumbnail}}"></img>
-    <p></p>
+    <p>Current Locale: {{ App::getLocale() }}</p>
+
     </div>
     <div><p class="text-white text-4xl">"{{$quote->quote}}"</p></div>
     <div><a href="{{ route('films.index', ['id' => $movie->id]) }}" class="underline text-white text-4xl mt-12">{{$movie->title}}</a></div> 

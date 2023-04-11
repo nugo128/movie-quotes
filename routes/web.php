@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\MoviesCrudController;
@@ -51,3 +52,4 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 Route::resource('admin/quotes', QuotesCrudController::class)->middleware('auth');
 Route::post('admin/quotes/create', [QuotesCrudController::class, 'store'])->name('quotes.store');
 
+Route::get('locale/{locale}', [LocaleController::class, 'setLocale'])->name('setLocale');
