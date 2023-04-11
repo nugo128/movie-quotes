@@ -6,8 +6,10 @@
                 @csrf
                 @method('PATCH')
                 <div class="mb-4">
-                    <label for="quote" class="block text-gray-700 mb-2">quote</label>
-                    <input type="text" name="quote" id="quote" value="{{$quote->quote}}" class="w-full border border-gray-400 px-4 py-2 rounded-md focus:outline-none focus:border-blue-500">
+                    <label for="quote_en" class="block text-gray-700 mb-2">quote_en</label>
+                    <input type="text" name="quote_en" id="quote_en" value="{{ $quote->getTranslation('quote', 'en') }}" class="w-full border border-gray-400 px-4 py-2 rounded-md focus:outline-none focus:border-blue-500">
+                    <label for="quote_ka" class="block text-gray-700 mb-2">quote_ka</label>
+                    <input type="text" name="quote_ka" id="quote_ka" value="{{ $quote->getTranslation('quote', 'ka') }}" class="w-full border border-gray-400 px-4 py-2 rounded-md focus:outline-none focus:border-blue-500">
                 </div>
                 <div class="mb-4">
                     <label for="movie_id" class="block text-gray-700 mb-2">Movie ID</label>

@@ -26,8 +26,12 @@ class MoviesCrudController extends Controller
     public function store(MovieRequest $request)
     {
         $attributes = $request->validated();
+        // dd($attributes['title_en']);
 
-        Movie::create($attributes);
+        $movie = new Movie();
+        $movie->setTranslation('title', 'en', $attributes['title_en']);
+        $movie->setTranslation('title', 'ka', $attributes['title_ka']);
+        $movie->save();
         return redirect()->route('admin');
     }
     public function edit(Movie $movie)
@@ -39,9 +43,10 @@ class MoviesCrudController extends Controller
     public function update(MovieRequest $request, Movie $movie)
     {
         $attributes = $request->validated();
-        $movie->update($attributes);
+        $movie->setTranslation('title', 'en', $attributes['title_en']);
+        $movie->setTranslation('title', 'ka', $attributes['title_ka']);
+        $movie->save();
         return redirect()->route('admin')->with('success', 'edited!');
-
     }
     public function destroy(Movie $movie)
     {

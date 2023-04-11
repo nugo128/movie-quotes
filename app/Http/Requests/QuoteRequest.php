@@ -23,7 +23,8 @@ class QuoteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'quote' => 'required',
+            'quote_en' => 'required',
+            'quote_ka' => 'required',
             'movie_id' => ['required', Rule::exists('movies', 'id')],
             'thumbnail' => 'required|image'
         ];

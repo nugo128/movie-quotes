@@ -19,11 +19,10 @@ class QuotesCrudController extends Controller
     public function store(QuoteRequest $request)
     {
         $attributes = $request->validated();
-
         $quote = new Quote();
-        $quote->quote = $attributes['quote'];
+        $quote->setTranslation('quote', 'en', $attributes['quote_en']);
+        $quote->setTranslation('quote', 'ka', $attributes['quote_ka']);
         $quote->movie_id = $attributes['movie_id'];
-
         $quote->thumbnail = $request->file('thumbnail')->store('thumbnails');
 
         $quote->save();
@@ -38,8 +37,11 @@ class QuotesCrudController extends Controller
     }
     public function update(QuoteRequest $request, Quote $quote)
     {
-        $quote->quote = $request->input('quote');
-        $quote->movie_id = $request->input('movie_id');
+        $attributes = $request->validated();
+        $quote->setTranslation('quote', 'en', $attributes['quote_en']);
+        $quote->setTranslation('quote', 'ka', $attributes['quote_ka']);
+        $quote->movie_id = $attributes['movie_id'];
+
 
         if ($request->hasFile('thumbnail')) {
             $thumbnail = $request->file('thumbnail');

@@ -25,16 +25,8 @@ Route::get('/', function () {
     $movie = Movie::has('quote')->inRandomOrder()->first();
     $quote = $movie ? $movie->quote()->inRandomOrder()->first() : null;
     $user = auth()->user();
-
     return view('home.index', compact('movie', 'quote', 'user'));
 })->name('home');
-// Route::get('/movies/{movie}', function (Movie $movie) {
-//     // dd($movie->title);
-//     //tested if database works
-//     $movie = Movie::inRandomOrder()->first();
-//     $quote = Quote::where('movie_id', $movie->movie_id)->inRandomOrder()->first();
-//     return view('films.index', compact('movie', 'quote'));
-// });
 Route::get('/movies/{id}', [MovieController::class,'show'])->name('films.index');
 
 Route::get('/login', [LoginController::class,'create'])->name('login')->middleware('guest');
