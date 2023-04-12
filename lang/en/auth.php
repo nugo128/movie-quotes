@@ -14,6 +14,13 @@ return [
     */
 
     'failed' => 'These credentials do not match our records.',
+    'login'=>'Login',
+    'email'=>'Email',
+    'password'=>'Password',
+    'sign_in'=>'Sign in',
+    'email_req'=>'email is required',
+    'pass_req'=>'password is required',
+
 
 
 ];
