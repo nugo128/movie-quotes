@@ -75,7 +75,8 @@
                                         </td>
                                         <td class="px-10 py-2">
                                             <div class="w-44">
-                                                <img src="/storage/{{$quotes->thumbnail}}" alt="">
+                                            <img src="{{ str_contains($quotes->thumbnail, 'https') ? $quotes->thumbnail : '/storage/' . $quotes->thumbnail }}" alt="Thumbnail">
+
                                             </div>
                                         </td>
 
