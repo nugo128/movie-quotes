@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\MoviesCrudController;
@@ -24,16 +25,8 @@ Route::get('/', function () {
     $movie = Movie::has('quote')->inRandomOrder()->first();
     $quote = $movie ? $movie->quote()->inRandomOrder()->first() : null;
     $user = auth()->user();
-
     return view('home.index', compact('movie', 'quote', 'user'));
 })->name('home');
-// Route::get('/movies/{movie}', function (Movie $movie) {
-//     // dd($movie->title);
-//     //tested if database works
-//     $movie = Movie::inRandomOrder()->first();
-//     $quote = Quote::where('movie_id', $movie->movie_id)->inRandomOrder()->first();
-//     return view('films.index', compact('movie', 'quote'));
-// });
 Route::get('/movies/{id}', [MovieController::class,'show'])->name('films.index');
 
 Route::get('/login', [LoginController::class,'create'])->name('login')->middleware('guest');
@@ -51,3 +44,4 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 Route::resource('admin/quotes', QuotesCrudController::class)->middleware('auth');
 Route::post('admin/quotes/create', [QuotesCrudController::class, 'store'])->name('quotes.store');
 
+Route::get('locale/{locale}', [LocaleController::class, 'setLocale'])->name('setLocale');

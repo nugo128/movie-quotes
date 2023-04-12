@@ -10,14 +10,14 @@
 
 <body class="bg-[#4E4E4E] h-screen">
 <div class="flex justify-end items-center gap-4 text-white text-xl m-4">
+    
     @auth
-        <p>Welcome {{$name}}</p>
-
-        <a href="{{route('admin')}}">Admin Page</a>
+        <p>{{__('nav.welcome', ['name'=>$name])}}</p>
+        <a href="{{route('admin')}}">{{__('nav.admin')}}</a>
         <form action="{{route('logout')}}" method="post">
 
             @csrf
-            <button type="submit">Log Out</button>
+            <button type="submit">{{__('nav.logo_out')}}</button>
         </form>
     @endauth
 </div>
@@ -26,13 +26,13 @@
         <div class="flex flex-col items-center justify-center h-full ml-3 gap-2 fixed">
             <div
                 class="w-10 h-10 rounded-full text-white border-2 border-white flex items-center justify-center hover:cursor-pointer">
-                <p>EN</p>
+                <a href="{{ route('setLocale', ['locale' => 'en']) }}">en</a>
             </div>
 
 
             <div
-                class="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center hover:cursor-pointer">
-                <p>KA</p>
+            class="w-10 h-10 rounded-full text-white border-2 border-white flex items-center justify-center hover:cursor-pointer">
+                <a href="{{ route('setLocale', ['locale' => 'ka']) }}">ka</a>
             </div>
         </div>
         {{ $slot }}
