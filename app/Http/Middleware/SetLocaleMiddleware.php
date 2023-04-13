@@ -22,8 +22,6 @@ class SetLocaleMiddleware
             if (in_array($locale, ['en', 'ka'])) {
                 App::setLocale($locale);
             }
-        } else {
-            App::setLocale('en');
         }
 
         return $next($request);
