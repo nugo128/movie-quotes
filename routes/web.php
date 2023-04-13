@@ -32,16 +32,15 @@ Route::get('/movies/{id}', [MovieController::class,'show'])->name('films.index')
 Route::get('/login', [LoginController::class,'create'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'login']);
 
-Route::post('/logout', [LoginController::class,'destroy'])->name('logout');
+Route::post('/logout', [LoginController::class,'logout'])->name('logout');
 
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/', [MoviesCrudController::class, 'index'])->name('admin');
     Route::resource('movies', MoviesCrudController::class)->except('show');
-    Route::post('movies/create', [MoviesCrudController::class, 'store'])->name('movies.store');
 });
 
 Route::resource('admin/quotes', QuotesCrudController::class)->middleware('auth');
-Route::post('admin/quotes/create', [QuotesCrudController::class, 'store'])->name('quotes.store');
+Route::post('admin/quotes/create', [QuotesCrudController::class, 'store'])->name('quotes.store.post');
 
 Route::get('locale/{locale}', [LocaleController::class, 'setLocale'])->name('setLocale');
