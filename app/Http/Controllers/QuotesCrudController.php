@@ -23,8 +23,6 @@ class QuotesCrudController extends Controller
         $quote->setTranslation('quote', 'en', $attributes['quote_en']);
         $quote->setTranslation('quote', 'ka', $attributes['quote_ka']);
         $quote->movie_id = $attributes['movie_id'];
-        $quote->thumbnail = $request->file('thumbnail')->store('thumbnails');
-
         $quote->save();
 
         return redirect()->route('admin');

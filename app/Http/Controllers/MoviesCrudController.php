@@ -26,7 +26,6 @@ class MoviesCrudController extends Controller
     public function store(MovieRequest $request)
     {
         $attributes = $request->validated();
-        // dd($attributes['title_en']);
 
         $movie = new Movie();
         $movie->setTranslation('title', 'en', $attributes['title_en']);
@@ -36,8 +35,7 @@ class MoviesCrudController extends Controller
     }
     public function edit(Movie $movie)
     {
-        $user = auth()->user();
-
+        $user = $movie->current_user;
         return view('manage.movies.edit', ['movie' => $movie, 'user'=>$user]);
     }
     public function update(MovieRequest $request, Movie $movie)
