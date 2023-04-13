@@ -10,10 +10,6 @@ use Illuminate\Support\Facades\Route;
 
 class LoginController extends Controller
 {
-    public function create()
-    {
-        return view('login.create');
-    }
     public function login(Request $request)
     {
         $credentials = $request->validate([

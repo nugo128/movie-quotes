@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MovieController;
@@ -21,15 +22,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $movie = Movie::has('quote')->inRandomOrder()->first();
-    $quote = $movie ? $movie->quote()->inRandomOrder()->first() : null;
-    $user = auth()->user();
-    return view('home.index', compact('movie', 'quote', 'user'));
-})->name('home');
+Route::get('/', [HomeController::class,'index'])->name('home');
 Route::get('/movies/{id}', [MovieController::class,'show'])->name('films.index');
 
-Route::get('/login', [LoginController::class,'create'])->name('login')->middleware('guest');
+Route::view('/login', 'login.create')->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'login']);
 
 Route::post('/logout', [LoginController::class,'logout'])->name('logout');
