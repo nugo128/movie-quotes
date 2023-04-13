@@ -10,9 +10,8 @@ class MovieController extends Controller
 {
     public function show(Movie $movie, $id)
     {
-        $movie = Movie::with('quote', 'user')->findOrFail($id);
+        $movie = Movie::with('quote')->findOrFail($id);
         $quote = $movie->quote;
-        $user = $movie->current_user;
-        return view('films.index', compact('movie', 'quote', 'user'));
+        return view('films.index', compact('movie', 'quote'));
     }
 }

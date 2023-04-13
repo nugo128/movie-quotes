@@ -11,16 +11,15 @@ class MoviesCrudController extends Controller
 {
     public function index()
     {
-        $user = auth()->user();
+
         $movie = Movie::all();
         $quote = Quote::all();
-        return view('manage.movies.index', compact('user', 'movie', 'quote'));
+        return view('manage.movies.index', compact('movie', 'quote'));
     }
 
     public function create()
     {
-        $user = auth()->user();
-        return view('manage.movies.add-movie', compact('user'));
+        return view('manage.movies.add-movie');
     }
 
     public function store(MovieRequest $request)
@@ -35,8 +34,7 @@ class MoviesCrudController extends Controller
     }
     public function edit(Movie $movie)
     {
-        $user = $movie->current_user;
-        return view('manage.movies.edit', ['movie' => $movie, 'user'=>$user]);
+        return view('manage.movies.edit', ['movie' => $movie]);
     }
     public function update(MovieRequest $request, Movie $movie)
     {

@@ -11,7 +11,6 @@ class HomeController extends Controller
     {
         $movie = Movie::has('quote')->inRandomOrder()->first();
         $quote = $movie ? $movie->quote()->inRandomOrder()->first() : null;
-        $user = auth()->user();
-        return view('home.index', compact('movie', 'quote', 'user'));
+        return view('home.index', compact('movie', 'quote'));
     }
 }

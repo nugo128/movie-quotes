@@ -1,4 +1,4 @@
-<x-layout name='{{ $user->name }}'>
+<x-layout>
 
 
 <div class="flex flex-col w-full items-center mt-7 mb-10">

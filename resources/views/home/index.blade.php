@@ -1,4 +1,4 @@
-<x-layout name="{{auth()->check() ? $user->name: ''}}">
+<x-layout>
 @if ($quote)
 <section class="flex flex-col gap-10 justify-center align-middle w-screen items-center">
     @if ($movie)
