@@ -26,7 +26,7 @@ Route::get('/', [HomeController::class,'index'])->name('home');
 Route::get('/movies/{id}', [MovieController::class,'show'])->name('films.index');
 
 Route::view('/login', 'login.create')->name('login')->middleware('guest');
-Route::post('/login', [LoginController::class, 'login']);
+Route::post('/login', [LoginController::class, 'login'])->name('login-post');
 
 Route::post('/logout', [LoginController::class,'logout'])->name('logout');
 

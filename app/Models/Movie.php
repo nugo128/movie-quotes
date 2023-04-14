@@ -15,7 +15,7 @@ class Movie extends Model
     protected $fillable = [
         'title'
     ];
-    public function quote()
+    public function quotes()
     {
         return $this->hasMany(Quote::class);
     }

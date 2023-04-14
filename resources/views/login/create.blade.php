@@ -1,6 +1,6 @@
 <x-layout>
 <div class="flex flex-col items-center justify-center w-full">
-    <form method="POST" action="{{route('login')}}" class="bg-white rounded-lg shadow-lg p-10">
+    <form method="POST" action="{{route('login-post')}}" class="bg-white rounded-lg shadow-lg p-10">
         @csrf
         <h1 class="text-2xl font-bold mb-6">{{__('auth.login')}}</h1>
         <div class="mb-4">
