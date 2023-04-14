@@ -1,4 +1,4 @@
-@props(['name'])
+
 <!doctype html>
 <html>
 
@@ -12,7 +12,7 @@
 <div class="flex justify-end items-center gap-4 text-white text-xl m-4">
     
     @auth
-        <p>{{__('nav.welcome', ['name'=>$name])}}</p>
+        <p>{{__('nav.welcome', ['name'=>auth()->user()->name])}}</p>
         <a href="{{route('admin')}}">{{__('nav.admin')}}</a>
         <form action="{{route('logout')}}" method="post">
 

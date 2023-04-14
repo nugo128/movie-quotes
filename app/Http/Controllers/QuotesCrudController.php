@@ -12,9 +12,8 @@ class QuotesCrudController extends Controller
 {
     public function create()
     {
-        $user = auth()->user();
         $movie = Movie::all();
-        return view('manage.quotes.add-quote', compact('user', 'movie'));
+        return view('manage.quotes.add-quote', compact('movie'));
     }
     public function store(QuoteRequest $request)
     {
@@ -23,17 +22,14 @@ class QuotesCrudController extends Controller
         $quote->setTranslation('quote', 'en', $attributes['quote_en']);
         $quote->setTranslation('quote', 'ka', $attributes['quote_ka']);
         $quote->movie_id = $attributes['movie_id'];
-        $quote->thumbnail = $request->file('thumbnail')->store('thumbnails');
-
         $quote->save();
 
         return redirect()->route('admin');
     }
     public function edit(Quote $quote)
     {
-        $user = auth()->user();
         $movies = Movie::all();
-        return view('manage.quotes.edit', ['quote' => $quote, 'user'=>$user, 'movies'=>$movies]);
+        return view('manage.quotes.edit', ['quote' => $quote, 'movies'=>$movies]);
     }
     public function update(QuoteRequest $request, Quote $quote)
     {
